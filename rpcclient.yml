@@ -1,0 +1,27 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: rpc-client-deployment
+  labels:
+    app: rpc-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rpc-client
+  template:
+    metadata:
+      labels:
+        app: rpc-client
+    spec:  
+      containers:
+        - name: rpc-client
+          image: rpc-client
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+            - containerPort: 9494
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8080

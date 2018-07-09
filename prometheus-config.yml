@@ -1,0 +1,5 @@
+scrape_configs:
+  - job_name:       'lookout-client'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['rpc-server-service:9494', 'rpc-client-service:9494']

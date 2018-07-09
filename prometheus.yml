@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  labels:
+    app: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:  
+      containers:
+        - name: prometheus
+          image: my-prometheus
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9090
